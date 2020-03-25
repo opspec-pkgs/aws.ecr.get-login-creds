@@ -1,0 +1,53 @@
+description: gets login credentials for any AWS ECR registry your IAM principal has access to.
+inputs:
+  accessKeyId:
+    string:
+      constraints: { minLength: 20 }
+      description: access key for AWS
+  region:
+    string:
+      constraints: { minLength: 1 }
+      description: default region
+      default: us-west-2
+  secretAccessKey:
+    string:
+      constraints: { minLength: 20 }
+      description: secret access key for AWS
+      isSecret: true
+  sessionToken:
+    string:
+      isSecret: true
+      description: session token for AWS
+      default: " "
+outputs:
+  creds:
+    object:
+      description: username & password for any AWS ECR registry your IAM principal has access to
+      isSecret: true
+      constraints:
+        properties:
+          username:
+            minLength: 1
+          password:
+            minLength: 1
+run:
+  container:
+    image: { ref: 'opspecpkgs/aws.ecr.get-login-creds:1.0.0' }
+    cmd:
+      - sh
+      - -ce
+      - |
+        if [[ "$(sessionToken)" != " " ]]; then
+          export AWS_SESSION_TOKEN="$(sessionToken)"
+        fi
+        password=\$(aws ecr get-login-password)
+        echo -n "{\"username\": \"AWS\",\"password\": \"${password}\"}" > /creds
+    envVars:
+      AWS_ACCESS_KEY_ID: $(accessKeyId)
+      AWS_DEFAULT_REGION: $(region)
+      AWS_SECRET_ACCESS_KEY: $(secretAccessKey)
+    files:
+      /creds: $(creds)
+name: github.com/opspec-pkgs/aws.ecr.get-login-creds
+opspec: 0.1.6
+version: 1.0.0
