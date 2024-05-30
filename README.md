@@ -1,19 +1,17 @@
-[![Build Status](https://travis-ci.org/opspec-pkgs/aws.ecr.get-login-creds.svg?branch=master)](https://travis-ci.org/opspec-pkgs/aws.ecr.get-login-creds)
+[![Build Status](https://github.com/opspec-pkgs/aws.ecr.get-login-creds/workflows/build/badge.svg?branch=main)](https://github.com/opspec-pkgs/aws.ecr.get-login-creds/actions?query=workflow%3Abuild+branch%3Amain)
+
+<img src="icon.svg" alt="icon" height="100px">
 
 # Problem statement
 
 gets login credentials for any AWS ECR registry your IAM principal has access to.
 
-# Format
-
-the op uses [![opspec 0.1.6](https://img.shields.io/badge/opspec-0.1.6-brightgreen.svg?colorA=6b6b6b&colorB=fc16be)](https://opspec.io/0.1.6) definition format
-
 # Example usage
 
-## Install
+## Visualize
 
 ```shell
-opctl op install github.com/opspec-pkgs/aws.ecr.get-login-creds#1.0.0
+opctl ui github.com/opspec-pkgs/aws.ecr.get-login-creds#1.0.0
 ```
 
 ## Run
@@ -28,12 +26,11 @@ opctl run github.com/opspec-pkgs/aws.ecr.get-login-creds#1.0.0
 op:
   ref: github.com/opspec-pkgs/aws.ecr.get-login-creds#1.0.0
   inputs:
-    # required
-    accessKeyId:
-    secretAccessKey:
-    ### optional; uncomment to override default(s)
-    # region: us-west-2
-    # sessionToken:  
+    accessKeyId:  # 👈 required; provide a value
+    secretAccessKey:  # 👈 required; provide a value
+  ## uncomment to override defaults
+  #   region: "us-west-2"
+  #   sessionToken: " "
   outputs:
     creds:
 ```
@@ -41,7 +38,7 @@ op:
 # Support
 
 join us on
-[![Slack](https://opctl-slackin.herokuapp.com/badge.svg)](https://opctl-slackin.herokuapp.com/)
+[![Slack](https://img.shields.io/badge/slack-opctl-E01563.svg)](https://join.slack.com/t/opctl/shared_invite/zt-51zodvjn-Ul_UXfkhqYLWZPQTvNPp5w)
 or
 [open an issue](https://github.com/opspec-pkgs/aws.ecr.get-login-creds/issues)
 
@@ -55,4 +52,4 @@ and [tagged](https://git-scm.com/book/en/v2/Git-Basics-Tagging); see
 # Contributing
 
 see
-[project/CONTRIBUTING.md](https://github.com/opspec-pkgs/project/blob/master/CONTRIBUTING.md)
+[project/CONTRIBUTING.md](https://github.com/opspec-pkgs/project/blob/main/CONTRIBUTING.md)
